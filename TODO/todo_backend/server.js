@@ -6,7 +6,10 @@ require('dotenv').config();
 const TodoModel = require('./models/Todo');
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: process.env.FRONTEND_URL, // allow only your Vercel frontend
+  credentials: true
+}));
 app.use(express.json());
 
 mongoose.connect(process.env.MONGO_URI, {
